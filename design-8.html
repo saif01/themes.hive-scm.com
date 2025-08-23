@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Hive Supply Chain Management - Reliable logistics, transport, warehousing & supply chain solutions.">
+    <meta name="keywords" content="Supply Chain, Logistics, Warehousing, Transport, Freight, Delivery, Hive">
+    <meta name="author" content="Hive Supply Chain Management">
+    <title>Hive Supply Chain Management</title>
+
+    <!-- Vuetify 3 & Vue 3 -->
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.4.7/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.4.7/dist/vuetify.min.js"></script>
+
+    <!-- Smooth scrolling -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            padding: 80px 20px;
+        }
+
+        .hero {
+            background: url('assets/images/bg.jpg') center/cover no-repeat;
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.55);
+            padding: 60px;
+            border-radius: 12px;
+        }
+
+        .go-top {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            padding: 16px;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #fbc02d, #f57c00);
+            color: white;
+            transition: background 5s ease-in-out;
+        }
+
+        /* Active Menu Highlight */
+        .active-link {
+            border-bottom: 2px solid #f57c00;
+            font-weight: bold;
+            color: #f57c00 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <v-app>
+            <!-- HEADER / NAVBAR -->
+            <v-app-bar app flat color="white">
+                <v-container class="d-flex align-center justify-space-between">
+                    <v-toolbar-title>
+                        <img src="assets/logo/hive.jpg" alt="Hive Logo" height="40">
+                        <span class="ml-2 font-weight-bold">Hive SCM</span>
+                    </v-toolbar-title>
+
+                    <!-- Menu with active state -->
+                    <v-btn text href="#home" :class="{ 'active-link': activeSection==='home' }">Home</v-btn>
+                    <v-btn text href="#services" :class="{ 'active-link': activeSection==='services' }">Services</v-btn>
+                    <v-btn text href="#about" :class="{ 'active-link': activeSection==='about' }">About Us</v-btn>
+                    <v-btn text href="#contact" :class="{ 'active-link': activeSection==='contact' }">Contact Us</v-btn>
+                    <v-btn color="orange-darken-2" class="ml-4" href="#contact">Get a Quote</v-btn>
+                </v-container>
+            </v-app-bar>
+
+            <!-- HERO -->
+            <section id="home" class="hero">
+                <v-container>
+                    <div class="overlay text-center">
+                        <h1 class="display-2">Reliable Supply Chain Solutions</h1>
+                        <p class="mt-4">Optimizing logistics, warehousing & global transport for your business success.
+                        </p>
+                        <v-btn color="orange" size="large" class="mt-6" href="#services">Explore Services</v-btn>
+                    </div>
+                </v-container>
+            </section>
+
+            <!-- SERVICES -->
+            <section id="services" class="gradient-bg">
+                <v-container>
+                    <h2 class="text-center mb-8">Our Core Services</h2>
+                    <v-row>
+                        <v-col cols="12" sm="6" md="3" v-for="(service,i) in services" :key="i">
+                            <v-card outlined class="pa-4 text-center">
+                                <v-icon size="40" color="orange">{{ service.icon }}</v-icon>
+                                <h3 class="mt-3">{{ service.title }}</h3>
+                                <p>{{ service.desc }}</p>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </section>
+
+            <!-- ABOUT US -->
+            <section id="about">
+                <v-container>
+                    <h2 class="text-center mb-6">About Us</h2>
+                    <p class="text-center mx-auto" style="max-width:700px">
+                        At Hive Supply Chain Management, our mission is to transform logistics into a seamless backbone
+                        of business growth. Our values center around reliability, transparency, and innovation.
+                        With over 15 years of industry experience, we’ve partnered with global leaders to deliver
+                        cost-efficient,
+                        sustainable, and timely supply chain solutions.
+                    </p>
+                </v-container>
+            </section>
+
+            <!-- CONTACT US -->
+            <section id="contact" class="gradient-bg">
+                <v-container>
+                    <h2 class="text-center mb-6">Let’s Work Together</h2>
+                    <v-row justify="center">
+                        <v-col cols="12" md="8">
+                            <v-card class="pa-6">
+                                <v-form>
+                                    <v-text-field label="Name" required></v-text-field>
+                                    <v-text-field label="Email" required type="email"></v-text-field>
+                                    <v-text-field label="Phone (optional)"></v-text-field>
+                                    <v-textarea label="Message" required></v-textarea>
+                                    <v-btn color="orange-darken-2" class="mt-4" block>Send Message</v-btn>
+                                </v-form>
+                                <div class="text-center mt-6">
+                                    <v-btn icon href="https://facebook.com" target="_blank"><v-icon
+                                            size="28">mdi-facebook</v-icon></v-btn>
+                                    <v-btn icon href="https://twitter.com" target="_blank"><v-icon
+                                            size="28">mdi-twitter</v-icon></v-btn>
+                                    <v-btn icon href="https://linkedin.com" target="_blank"><v-icon
+                                            size="28">mdi-linkedin</v-icon></v-btn>
+                                    <v-btn icon href="https://instagram.com" target="_blank"><v-icon
+                                            size="28">mdi-instagram</v-icon></v-btn>
+                                </div>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </section>
+
+            <!-- FOOTER -->
+            <v-footer padless color="grey-darken-4" class="white--text">
+                <v-container class="py-6 text-center white--text">
+                    <p>&copy; {{ new Date().getFullYear() }} Hive Supply Chain Management. All Rights Reserved.</p>
+                    <div>
+                        <v-icon size="20" class="mr-2">mdi-map-marker</v-icon> HQ: New York, NY
+                        | <v-icon size="20" class="ml-2 mr-2">mdi-phone</v-icon> +1 (555) 123-4567
+                    </div>
+                </v-container>
+            </v-footer>
+
+            <!-- Floating Buttons -->
+            <v-btn v-show="showTop" class="go-top" color="orange" icon @click="goTop">
+                <v-icon>mdi-chevron-up</v-icon>
+            </v-btn>
+            <div class="whatsapp" @click="openWhatsApp">
+                <v-icon>mdi-whatsapp</v-icon>
+            </div>
+        </v-app>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        const { createVuetify } = Vuetify;
+
+        const app = createApp({
+            data() {
+                return {
+                    activeSection: 'home',
+                    showTop: false,
+                    services: [
+                        { title: 'Freight Forwarding', icon: 'mdi-truck', desc: 'Global freight solutions by sea, air & land.' },
+                        { title: 'Warehousing', icon: 'mdi-warehouse', desc: 'Secure and scalable storage facilities.' },
+                        { title: 'Inventory Mgmt.', icon: 'mdi-clipboard-list', desc: 'Real-time inventory control systems.' },
+                        { title: 'Last-Mile Delivery', icon: 'mdi-bike', desc: 'Fast, trackable, end-to-end deliveries.' },
+                        { title: 'Customs Clearance', icon: 'mdi-file-document', desc: 'Smooth international trade operations.' },
+                        { title: 'Supply Chain Consulting', icon: 'mdi-chart-line', desc: 'Expert strategy to optimize logistics.' },
+                        { title: 'Cold Chain Logistics', icon: 'mdi-snowflake', desc: 'Temperature-controlled freight services.' },
+                        { title: 'E-commerce Fulfillment', icon: 'mdi-cart', desc: 'Scalable solutions for online retailers.' }
+                    ]
+                };
+            },
+            mounted() {
+                window.addEventListener('scroll', this.onScroll);
+            },
+            beforeUnmount() {
+                window.removeEventListener('scroll', this.onScroll);
+            },
+            methods: {
+                onScroll() {
+                    this.showTop = window.scrollY > 300;
+
+                    const sections = ['home', 'services', 'about', 'contact'];
+                    for (let sec of sections) {
+                        const el = document.getElementById(sec);
+                        if (el) {
+                            const rect = el.getBoundingClientRect();
+                            if (rect.top <= 100 && rect.bottom >= 100) {
+                                this.activeSection = sec;
+                                break;
+                            }
+                        }
+                    }
+                },
+                goTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); },
+                openWhatsApp() { window.open('https://wa.me/15551234567', '_blank'); }
+            }
+        });
+
+        app.use(createVuetify());
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

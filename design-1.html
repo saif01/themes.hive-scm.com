@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Basics -->
+    <title>Hive Supply Chain Management — Efficient Supply Chain Solutions</title>
+    <meta name="description"
+        content="Hive Supply Chain Management delivers door-to-door shipping, L/C & foreign payments, CNF & documentation, logistics sourcing, procurement, tourism support, local transport, and market research." />
+    <meta name="keywords"
+        content="supply chain, logistics, shipping, procurement, CNF, export import, Bangladesh, door to door, cargo booking, market research" />
+    <link rel="canonical" href="https://www.example.com/" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hive Supply Chain Management" />
+    <meta property="og:description" content="Efficient Supply Chain Solutions Tailored to Your Business." />
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1494415859740-21e878dd929d?q=80&w=1600&auto=format&fit=crop" />
+    <meta property="og:url" content="https://www.example.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Favicons (replace with your brand assets) -->
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.x/css/materialdesignicons.min.css" rel="stylesheet" />
+
+    <!-- Vuetify 3 (via UMD CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.x/dist/vuetify.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.x/dist/vuetify.min.js"></script>
+
+    <style>
+        :root {
+            --hero-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop');
+            /* Replace with branded image */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: grid;
+            place-items: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: var(--hero-image);
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.6);
+            transform: scale(1.05);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top right, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.15));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        /* Floating WhatsApp button */
+        .whatsapp-fab {
+            position: fixed;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+        }
+
+        @media (max-width: 600px) {
+            .whatsapp-fab {
+                bottom: 16px;
+                top: auto;
+                transform: none;
+            }
+        }
+
+        /* Section spacing */
+        section {
+            scroll-margin-top: 88px;
+        }
+
+        /* Subtle card hover */
+        .hover-card {
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+
+        .hover-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        }
+    </style>
+
+    <!-- Structured Data (Organization) -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Hive Supply Chain Management",
+    "url": "https://www.example.com/",
+    "logo": "https://www.example.com/logo.png",
+    "sameAs": [
+      "https://www.linkedin.com/",
+      "https://www.facebook.com/",
+      "https://www.instagram.com/",
+      "https://x.com/"
+    ]
+  }
+  </script>
+
+    <!-- Google Analytics (replace G-XXXXXXXXXX) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); } gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <v-app>
+            <!-- App Bar / Header -->
+            <v-app-bar flat class="px-3" height="72" scroll-behavior="elevate">
+                <v-container class="d-flex align-center" max-width="1280">
+                    <v-btn href="#home" variant="text" class="px-0" style="text-transform:none">
+                        <v-avatar size="40" class="mr-2">
+                            <v-img
+                                src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/apachekafka.svg"
+                                alt="Hive Logo" cover></v-img>
+                        </v-avatar>
+                        <span class="text-h6 font-weight-bold">Hive SCM</span>
+                    </v-btn>
+                    <v-spacer></v-spacer>
+                    <nav class="d-none d-md-flex">
+                        <v-btn variant="text" class="mx-1" @click="scrollTo('home')">Home</v-btn>
+                        <v-btn variant="text" class="mx-1" @click="scrollTo('services')">Services</v-btn>
+                        <v-btn variant="text" class="mx-1" @click="scrollTo('about')">About Us</v-btn>
+                        <v-btn variant="text" class="mx-1" @click="scrollTo('contact')">Contact Us</v-btn>
+                    </nav>
+                    <v-btn color="primary" class="ml-2" rounded="lg" @click="quoteDialog=true">
+                        <v-icon start class="mr-1">mdi-clipboard-text</v-icon>
+                        Get a Quote
+                    </v-btn>
+                </v-container>
+            </v-app-bar>
+
+            <v-main>
+                <!-- Hero -->
+                <section id="home" class="hero">
+                    <div class="hero-content">
+                        <div class="text-overline mb-2">Hive Supply Chain Management</div>
+                        <h1 class="text-h3 text-md-h2 font-weight-bold mb-4">Efficient Supply Chain Solutions Tailored
+                            to Your Business</h1>
+                        <p class="text-subtitle-1 mb-6">Door-to-door shipping, international payments, logistics
+                            management, and more.</p>
+                        <div class="d-flex flex-wrap justify-center ga-3">
+                            <v-btn size="large" color="primary" rounded="lg" @click="scrollTo('services')">
+                                <v-icon start>mdi-truck-fast-outline</v-icon>
+                                Explore Our Services
+                            </v-btn>
+                            <v-btn size="large" color="secondary" variant="tonal" rounded="lg"
+                                @click="scrollTo('contact')">
+                                <v-icon start>mdi-email-fast-outline</v-icon>
+                                Contact Us
+                            </v-btn>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Services -->
+                <section id="services" class="py-12">
+                    <v-container max-width="1280">
+                        <div class="text-center mb-8">
+                            <h2 class="text-h4 text-md-h3 font-weight-bold mb-2">Our Services</h2>
+                            <p class="text-body-1">Complete, end-to-end support across logistics, finance,
+                                documentation, and market insights.</p>
+                        </div>
+
+                        <v-row>
+                            <v-col v-for="(s, i) in services" :key="i" cols="12" sm="6" md="3">
+                                <v-card class="pa-5 rounded-2xl hover-card" elevation="2">
+                                    <div class="d-flex align-center mb-3">
+                                        <v-avatar size="44" color="primary" variant="tonal" class="mr-3">
+                                            <v-icon size="26">{{ s.icon }}</v-icon>
+                                        </v-avatar>
+                                        <h3 class="text-subtitle-1 font-weight-bold mb-0">{{ s.title }}</h3>
+                                    </div>
+                                    <p class="text-body-2 mb-4">{{ s.desc }}</p>
+                                    <div class="d-flex justify-space-between align-center">
+                                        <v-btn size="small" variant="text" color="primary" @click="scrollTo('contact')">
+                                            Learn More
+                                            <v-icon end size="18">mdi-arrow-right</v-icon>
+                                        </v-btn>
+                                    </div>
+                                </v-card>
+                            </v-col>
+                        </v-row>
+
+                        <div class="text-center mt-8">
+                            <v-btn color="primary" size="large" rounded="lg" @click="scrollTo('contact')">
+                                Get a Custom Proposal
+                            </v-btn>
+                        </div>
+                    </v-container>
+                </section>
+
+                <!-- About Us -->
+                <section id="about" class="py-12" style="background: #fafafa;">
+                    <v-container max-width="1100">
+                        <v-row align="center" justify="center" class="ga-6">
+                            <v-col cols="12" md="6">
+                                <v-img
+                                    src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop"
+                                    alt="Logistics network" height="360" cover class="rounded-2xl"
+                                    loading="lazy"></v-img>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <h2 class="text-h4 text-md-h3 font-weight-bold mb-4">About Us</h2>
+                                <p class="text-body-1 mb-4">
+                                    At <strong>Hive Supply Chain Management</strong>, we deliver reliable,
+                                    cost-effective, and transparent solutions across the entire supply chain.
+                                    Our mission is to simplify international trade and logistics for businesses of all
+                                    sizes through technology, expertise, and hands-on support.
+                                </p>
+                                <v-list density="compact">
+                                    <v-list-item prepend-icon="mdi-check-circle-outline"
+                                        title="Customer-first, outcome-driven approach"></v-list-item>
+                                    <v-list-item prepend-icon="mdi-check-circle-outline"
+                                        title="Experienced team across logistics, finance & compliance"></v-list-item>
+                                    <v-list-item prepend-icon="mdi-check-circle-outline"
+                                        title="Transparent pricing & proactive communication"></v-list-item>
+                                </v-list>
+                                <div class="mt-4">
+                                    <v-btn color="primary" rounded="lg" @click="scrollTo('contact')">Let's Work
+                                        Together</v-btn>
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="py-12">
+                    <v-container max-width="1100">
+                        <v-sheet color="secondary" class="rounded-2xl pa-8" elevation="1"
+                            style="background-image: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(0,0,0,0.06));">
+                            <v-row align="center">
+                                <v-col cols="12" md="8">
+                                    <h2 class="text-h5 text-md-h4 font-weight-bold mb-2 text-white">Let’s Work Together
+                                    </h2>
+                                    <p class="text-white text-body-1 mb-0">Contact us today to get started with
+                                        customized supply chain solutions.</p>
+                                </v-col>
+                                <v-col cols="12" md="4" class="text-md-right">
+                                    <v-btn color="primary" size="large" rounded="lg" @click="scrollTo('contact')">
+                                        Contact Us
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-sheet>
+                    </v-container>
+                </section>
+
+                <!-- Contact Us -->
+                <section id="contact" class="py-12">
+                    <v-container max-width="1000">
+                        <div class="text-center mb-8">
+                            <h2 class="text-h4 text-md-h3 font-weight-bold mb-2">Contact Us</h2>
+                            <p class="text-body-1">We'd love to hear from you. Send us a message and our team will get
+                                back to you promptly.</p>
+                        </div>
+                        <v-row class="ga-6">
+                            <v-col cols="12" md="7">
+                                <v-form @submit.prevent="submitContact" ref="contactForm" v-model="contactValid">
+                                    <v-text-field v-model="contact.name" label="Name" :rules="[rules.required]"
+                                        variant="outlined" density="comfortable" class="mb-3" />
+                                    <v-text-field v-model="contact.email" label="Email"
+                                        :rules="[rules.required, rules.email]" variant="outlined" density="comfortable"
+                                        class="mb-3" />
+                                    <v-textarea v-model="contact.message" label="Message" :rules="[rules.required]"
+                                        variant="outlined" rows="6" auto-grow class="mb-4" />
+                                    <div class="d-flex align-center ga-3">
+                                        <v-btn type="submit" color="primary" rounded="lg">
+                                            <v-icon start>mdi-send</v-icon>
+                                            Send Message
+                                        </v-btn>
+                                        <v-btn variant="tonal" color="secondary" rounded="lg"
+                                            @click="resetContact">Reset</v-btn>
+                                    </div>
+                                </v-form>
+                                <div class="mt-6">
+                                    <p class="text-body-2 mb-1"><v-icon class="mr-1"
+                                            size="18">mdi-phone</v-icon><strong>Phone:</strong> <a
+                                            :href="`tel:${PHONE_NUMBER}`">{{ PHONE_NUMBER }}</a></p>
+                                    <p class="text-body-2 mb-1"><v-icon class="mr-1"
+                                            size="18">mdi-email</v-icon><strong>Email:</strong> <a
+                                            :href="`mailto:${CONTACT_EMAIL}`">{{ CONTACT_EMAIL }}</a></p>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" md="5">
+                                <v-sheet class="pa-6 rounded-2xl" elevation="2">
+                                    <h3 class="text-subtitle-1 font-weight-bold mb-4">Connect on Social</h3>
+                                    <div class="d-flex ga-3 mb-6">
+                                        <v-btn :href="SOCIAL.linkedin" target="_blank" icon variant="tonal"
+                                            color="primary" aria-label="LinkedIn"><v-icon>mdi-linkedin</v-icon></v-btn>
+                                        <v-btn :href="SOCIAL.facebook" target="_blank" icon variant="tonal"
+                                            color="primary" aria-label="Facebook"><v-icon>mdi-facebook</v-icon></v-btn>
+                                        <v-btn :href="SOCIAL.instagram" target="_blank" icon variant="tonal"
+                                            color="primary"
+                                            aria-label="Instagram"><v-icon>mdi-instagram</v-icon></v-btn>
+                                        <v-btn :href="SOCIAL.twitter" target="_blank" icon variant="tonal"
+                                            color="primary" aria-label="Twitter"><v-icon>mdi-twitter</v-icon></v-btn>
+                                    </div>
+                                    <h3 class="text-subtitle-1 font-weight-bold mb-2">Office</h3>
+                                    <p class="text-body-2 mb-1">Hive Supply Chain Management</p>
+                                    <p class="text-body-2 mb-1">123 Trade Avenue, Dhaka, Bangladesh</p>
+                                    <p class="text-body-2">Open: Sun–Thu 9:00–18:00</p>
+                                </v-sheet>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </section>
+
+                <!-- Footer -->
+                <footer class="py-8" style="background:#0d2538; color:white;">
+                    <v-container max-width="1280">
+                        <v-row class="ga-6">
+                            <v-col cols="12" md="6">
+                                <div class="d-flex align-center mb-3">
+                                    <v-avatar size="36" class="mr-2">
+                                        <v-img
+                                            src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/apachekafka.svg"
+                                            alt="Hive Logo" cover></v-img>
+                                    </v-avatar>
+                                    <strong>Hive Supply Chain Management</strong>
+                                </div>
+                                <p class="text-body-2">123 Trade Avenue, Dhaka, Bangladesh</p>
+                                <p class="text-body-2 mb-0">Phone: <a :href="`tel:${PHONE_NUMBER}`"
+                                        class="text-white text-decoration-underline">{{ PHONE_NUMBER }}</a> · Email: <a
+                                        :href="`mailto:${CONTACT_EMAIL}`"
+                                        class="text-white text-decoration-underline">{{ CONTACT_EMAIL }}</a></p>
+                            </v-col>
+                            <v-col cols="12" md="6" class="d-flex flex-column align-end justify-space-between">
+                                <div class="d-flex ga-2 mb-4">
+                                    <v-btn :href="SOCIAL.linkedin" target="_blank" icon variant="text"
+                                        class="text-white" aria-label="LinkedIn"><v-icon>mdi-linkedin</v-icon></v-btn>
+                                    <v-btn :href="SOCIAL.facebook" target="_blank" icon variant="text"
+                                        class="text-white" aria-label="Facebook"><v-icon>mdi-facebook</v-icon></v-btn>
+                                    <v-btn :href="SOCIAL.instagram" target="_blank" icon variant="text"
+                                        class="text-white" aria-label="Instagram"><v-icon>mdi-instagram</v-icon></v-btn>
+                                    <v-btn :href="SOCIAL.twitter" target="_blank" icon variant="text" class="text-white"
+                                        aria-label="Twitter"><v-icon>mdi-twitter</v-icon></v-btn>
+                                </div>
+                                <div class="text-body-2">© {{ year }} Hive Supply Chain Management. All Rights Reserved.
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </footer>
+
+                <!-- WhatsApp Floating Button -->
+                <div class="whatsapp-fab">
+                    <v-btn :href="`https://wa.me/${WHATSAPP_NUMBER}`" target="_blank" color="success" size="large"
+                        class="elevation-6" rounded="xl">
+                        <v-icon start>mdi-whatsapp</v-icon>
+                        WhatsApp
+                    </v-btn>
+                </div>
+
+                <!-- Quote Dialog -->
+                <v-dialog v-model="quoteDialog" width="520">
+                    <v-card class="rounded-xl">
+                        <v-card-title class="text-h6 font-weight-bold">Get a Quote</v-card-title>
+                        <v-card-text>
+                            <v-form @submit.prevent="submitQuote" v-model="quoteValid" ref="quoteForm">
+                                <v-text-field v-model="quote.name" label="Name" :rules="[rules.required]"
+                                    variant="outlined" density="comfortable" class="mb-3" />
+                                <v-text-field v-model="quote.email" label="Email" :rules="[rules.required, rules.email]"
+                                    variant="outlined" density="comfortable" class="mb-3" />
+                                <v-text-field v-model="quote.company" label="Company (optional)" variant="outlined"
+                                    density="comfortable" class="mb-3" />
+                                <v-textarea v-model="quote.details" label="Shipment / Service Details"
+                                    :rules="[rules.required]" rows="5" auto-grow variant="outlined" class="mb-3" />
+                                <div class="d-flex justify-end ga-3 mt-2">
+                                    <v-btn variant="text" @click="quoteDialog=false">Cancel</v-btn>
+                                    <v-btn type="submit" color="primary">Submit</v-btn>
+                                </div>
+                            </v-form>
+                        </v-card-text>
+                    </v-card>
+                </v-dialog>
+
+                <!-- Snackbar Notifications -->
+                <v-snackbar v-model="snackbar.show" :timeout="3500" :color="snackbar.color">
+                    {{ snackbar.text }}
+                </v-snackbar>
+            </v-main>
+        </v-app>
+    </div>
+
+    <script>
+        const CONTACT_EMAIL = 'info@hivesupplychain.com'; // TODO: replace with your email
+        const PHONE_NUMBER = '+8801XXXXXXXXX'; // TODO: replace with your phone (E.164 format preferred)
+        const WHATSAPP_NUMBER = '8801XXXXXXXXX'; // TODO: replace with your WhatsApp number w/o plus
+
+        const SOCIAL = {
+            linkedin: 'https://www.linkedin.com/',
+            facebook: 'https://www.facebook.com/',
+            instagram: 'https://www.instagram.com/',
+            twitter: 'https://x.com/'
+        };
+
+        const { createApp, ref, computed } = Vue;
+        const { createVuetify } = Vuetify;
+
+        const vuetify = createVuetify({
+            theme: {
+                defaultTheme: 'hive',
+                themes: {
+                    hive: {
+                        dark: false,
+                        colors: {
+                            primary: '#FFB300', // amber/honey
+                            secondary: '#1B4B66', // slate blue
+                            success: '#2e7d32',
+                            background: '#ffffff',
+                            surface: '#ffffff'
+                        }
+                    }
+                }
+            }
+        });
+
+        const app = createApp({
+            data() {
+                return {
+                    CONTACT_EMAIL,
+                    PHONE_NUMBER,
+                    WHATSAPP_NUMBER,
+                    SOCIAL,
+                    quoteDialog: false,
+                    snackbar: { show: false, text: '', color: 'success' },
+                    contact: { name: '', email: '', message: '' },
+                    contactValid: false,
+                    quote: { name: '', email: '', company: '', details: '' },
+                    quoteValid: false,
+                    services: [
+                        { icon: 'mdi-truck-fast-outline', title: 'Door-to-Door Shipping Service', desc: 'Seamless pickup and delivery with tracking, customs handling, and proactive updates.' },
+                        { icon: 'mdi-cash-multiple', title: 'L/C and Foreign Payment Support', desc: 'Guidance on letters of credit, international transfers, and compliant payment flows.' },
+                        { icon: 'mdi-file-document-outline', title: 'CNF & Export-Import Documentation', desc: 'End-to-end documentation, declarations, and port clearances without hassle.' },
+                        { icon: 'mdi-ferry', title: 'Cargo Booking & Shipping Sourcing', desc: 'Best-fit carriers, routes, and rates across air, sea, and land with reliable SLAs.' },
+                        { icon: 'mdi-clipboard-text-search-outline', title: 'Sourcing, Procurement & Inspection', desc: 'Vendor sourcing, price negotiation, and pre-shipment inspection to ensure quality.' },
+                        { icon: 'mdi-airplane', title: 'Business & Exhibition Tourism', desc: 'End-to-end travel logistics for trade shows, delegations, and business visits.' },
+                        { icon: 'mdi-truck-delivery', title: 'Local Transport & Courier Support', desc: 'City-wide courier and nationwide transport for parcels, pallets, and bulk.' },
+                        { icon: 'mdi-chart-line', title: 'Market Research & Analysis', desc: 'Actionable market insights, competitor tracking, and demand forecasting.' }
+                    ],
+                    rules: {
+                        required: v => !!v || 'This field is required',
+                        email: v => /\S+@\S+\.\S+/.test(v) || 'Enter a valid email'
+                    }
+                }
+            },
+            computed: {
+                year() { return new Date().getFullYear(); }
+            },
+            methods: {
+                scrollTo(id) {
+                    const el = document.getElementById(id);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                },
+                resetContact() {
+                    this.contact = { name: '', email: '', message: '' };
+                    this.$refs.contactForm?.resetValidation?.();
+                },
+                submitContact() {
+                    if (!this.contactValid) return;
+                    // Default: send via mailto (simple & works without backend)
+                    const subject = encodeURIComponent('Website Inquiry');
+                    const body = encodeURIComponent(`Name: ${this.contact.name}\nEmail: ${this.contact.email}\n\nMessage:\n${this.contact.message}`);
+                    window.location.href = `mailto:${this.CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+                    this.snackbar = { show: true, text: 'Opening your email app…', color: 'success' };
+                },
+                submitQuote() {
+                    if (!this.quoteValid) return;
+                    const subject = encodeURIComponent('Quote Request');
+                    const body = encodeURIComponent(
+                        `Name: ${this.quote.name}\nEmail: ${this.quote.email}\nCompany: ${this.quote.company}\n\nDetails:\n${this.quote.details}`
+                    );
+                    window.location.href = `mailto:${this.CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+                    this.quoteDialog = false;
+                    this.snackbar = { show: true, text: 'Quote draft opened in your email app.', color: 'success' };
+                    this.$refs.quoteForm?.resetValidation?.();
+                    this.quote = { name: '', email: '', company: '', details: '' };
+                }
+            }
+        });
+
+        app.use(vuetify).mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hive Supply Chain Management</title>
+    <!-- SEO -->
+    <meta name="description"
+        content="Hive Supply Chain Management provides end‑to‑end logistics: ocean & air freight, warehousing, customs, last‑mile delivery, and supply chain analytics." />
+    <meta name="keywords"
+        content="Hive, Supply Chain, Logistics, Freight Forwarding, Warehousing, Customs Clearance, Transportation, 3PL, Last Mile, SCM" />
+    <meta name="author" content="Hive Supply Chain Management" />
+    <meta property="og:title" content="Hive Supply Chain Management" />
+    <meta property="og:description" content="Smarter, faster supply chains with reliable global logistics." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.example.com" />
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1565787969133-3a26f7a00c42?w=1200&q=80&auto=format&fit=crop" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet" />
+
+    <!-- Vuetify 3 (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.6.15/dist/vuetify.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.38/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.6.15/dist/vuetify.min.js"></script>
+
+    <style>
+        :root {
+            --brand: #ffb300;
+            /* amber */
+            --brand-dark: #ff9800;
+            --ink: #111827;
+            --ink-2: #4b5563;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        }
+
+        .section {
+            padding: 64px 0;
+        }
+
+        @media (max-width: 600px) {
+            .section {
+                padding: 40px 0;
+            }
+        }
+
+        /* Active nav link */
+        .active-link {
+            color: var(--brand-dark) !important;
+            font-weight: 700;
+        }
+
+        /* Floating buttons */
+        .whatsapp-fab {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 9999;
+        }
+
+        .go-top-btn {
+            position: fixed;
+            right: 16px;
+            bottom: 86px;
+            z-index: 9998;
+        }
+
+        /* Gradients + subtle animation */
+        .brand-gradient {
+            background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+        }
+
+        .animated-gradient {
+            background: linear-gradient(120deg, #fff7e6, #fff, #fff7e6);
+            background-size: 200% 200%;
+            animation: shift 12s ease-in-out infinite;
+        }
+
+        @keyframes shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .overlay-dark {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, .35), rgba(0, 0, 0, .6));
+        }
+
+        .logo-text {
+            letter-spacing: .5px;
+        }
+
+        .v-application {
+            background: #fff;
+        }
+    </style>
+
+    <!-- Google Analytics (replace G-XXXXXXXXXX) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); } // eslint-disable-line
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <v-app>
+            <!-- Header / App Bar -->
+            <v-app-bar flat height="72" color="white">
+                <v-container class="d-flex align-center">
+                    <div class="d-flex align-center" style="gap: 10px;">
+                        <v-avatar color="amber" size="36" aria-label="Hive SCM Logo"> <img src="assets/logo/hive.jpg"
+                                alt="Hive Logo" height="40"></v-avatar>
+                        <div class="text-h6 font-weight-bold logo-text" style="color: var(--ink);">Hive SCM</div>
+                    </div>
+                    <v-spacer></v-spacer>
+                    <nav class="d-none d-md-flex" style="gap: 8px;">
+                        <v-btn variant="text" :class="{ 'active-link': active==='home' }"
+                            @click="go('home')">Home</v-btn>
+                        <v-btn variant="text" :class="{ 'active-link': active==='services' }"
+                            @click="go('services')">Services</v-btn>
+                        <v-btn variant="text" :class="{ 'active-link': active==='about' }" @click="go('about')">About
+                            Us</v-btn>
+                        <v-btn variant="text" :class="{ 'active-link': active==='contact' }"
+                            @click="go('contact')">Contact Us</v-btn>
+                        <v-btn color="amber-darken-1" class="text-black" rounded="lg"
+                            @click="trackAndGo('contact','get_quote_click')">Get a Quote</v-btn>
+                    </nav>
+                    <v-btn icon class="d-md-none" @click="drawer = true" aria-label="Open Menu"><v-icon
+                            icon="mdi-menu"></v-icon></v-btn>
+                </v-container>
+            </v-app-bar>
+
+            <!-- Mobile Drawer -->
+            <v-navigation-drawer v-model="drawer" location="right" temporary>
+                <v-list nav>
+                    <v-list-item @click="navTap('home')" :class="{ 'active-link': active==='home' }" title="Home"
+                        prepend-icon="mdi-home"></v-list-item>
+                    <v-list-item @click="navTap('services')" :class="{ 'active-link': active==='services' }"
+                        title="Services" prepend-icon="mdi-cogs"></v-list-item>
+                    <v-list-item @click="navTap('about')" :class="{ 'active-link': active==='about' }" title="About Us"
+                        prepend-icon="mdi-information-outline"></v-list-item>
+                    <v-list-item @click="navTap('contact')" :class="{ 'active-link': active==='contact' }"
+                        title="Contact Us" prepend-icon="mdi-email-outline"></v-list-item>
+                    <v-list-item>
+                        <v-btn block color="amber-darken-1" class="text-black" rounded="lg"
+                            @click="navTap('contact'); track('get_quote_click')">Get a Quote</v-btn>
+                    </v-list-item>
+                </v-list>
+            </v-navigation-drawer>
+
+            <v-main>
+                <!-- Hero -->
+                <section id="home" class="section pa-0">
+                    <v-img src="assets/images/bg.jpg" height="78vh" cover eager fetchpriority="high"
+                        alt="Cargo containers and port logistics">
+                        <div class="overlay-dark h-100 d-flex align-center">
+                            <v-container>
+                                <v-row>
+                                    <v-col cols="12" md="8">
+                                        <div class="text-h3 text-sm-h2 font-weight-bold mb-3" style="color: white;">
+                                            Smarter, Faster Supply Chains</div>
+                                        <div class="text-subtitle-1 text-sm-h6 mb-6"
+                                            style="color: #e5e7eb; max-width: 720px;">
+                                            End‑to‑end logistics solutions: freight, warehousing, customs, last‑mile &
+                                            more—designed to scale with your business.
+                                        </div>
+                                        <div class="d-flex flex-wrap" style="gap: 12px;">
+                                            <v-btn size="large" color="amber" class="text-black" rounded="lg"
+                                                @click="trackAndGo('services','explore_services')">
+                                                <v-icon start icon="mdi-arrow-right"></v-icon>
+                                                Explore Our Services
+                                            </v-btn>
+                                            <v-btn size="large" variant="outlined" color="white" rounded="lg"
+                                                @click="trackAndGo('contact','get_quote_click')">
+                                                Get a Quote
+                                            </v-btn>
+                                        </div>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </div>
+                    </v-img>
+                </section>
+
+                <!-- Services -->
+                <section id="services" class="section animated-gradient">
+                    <v-container>
+                        <v-row class="mb-8">
+                            <v-col cols="12" class="text-center">
+                                <div class="text-h4 font-weight-bold mb-2" style="color: var(--ink);">Core Services
+                                </div>
+                                <div class="text-subtitle-1" style="color: var(--ink-2);">Eight ways we move your
+                                    business forward</div>
+                            </v-col>
+                        </v-row>
+
+                        <v-row>
+                            <v-col v-for="(s, i) in services" :key="i" cols="12" sm="6" md="3">
+                                <v-hover v-slot="{ isHovering, props }">
+                                    <v-card v-bind="props" :elevation="isHovering ? 8 : 2" border rounded="xl"
+                                        class="h-100 transition-fast-in-fast-out">
+                                        <v-card-text class="py-6">
+                                            <div class="d-flex align-start" style="gap: 12px;">
+                                                <v-avatar size="44" color="amber-lighten-4">
+                                                    <v-icon :icon="s.icon" color="amber-darken-2"></v-icon>
+                                                </v-avatar>
+                                                <div>
+                                                    <div class="text-subtitle-1 font-weight-semibold mb-1"
+                                                        style="color: var(--ink);">{{ s.title }}</div>
+                                                    <div class="text-body-2" style="color: var(--ink-2);">{{ s.desc }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </v-card-text>
+                                    </v-card>
+                                </v-hover>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </section>
+
+                <!-- About Us -->
+                <section id="about" class="section" style="background:#fafafa;">
+                    <v-container>
+                        <v-row align="center" class="g-6">
+                            <v-col cols="12" md="6">
+                                <v-img
+                                    src="https://images.unsplash.com/photo-1529078155058-5d716f45d604?w=1200&q=70&auto=format&fit=crop"
+                                    height="360" cover lazy decoding="async" alt="Warehouse operations"></v-img>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <div class="text-h4 font-weight-bold mb-4" style="color: var(--ink);">About Hive SCM
+                                </div>
+                                <p class="text-body-1 mb-4" style="color: var(--ink-2);">
+                                    We are a logistics and supply chain partner focused on reliability, visibility, and
+                                    speed. Our mission is to simplify global trade for our clients.
+                                </p>
+                                <v-row>
+                                    <v-col cols="12" sm="6">
+                                        <v-list density="compact">
+                                            <v-list-subheader
+                                                class="px-0 text-uppercase text-caption">Mission</v-list-subheader>
+                                            <v-list-item class="px-0"><v-icon start icon="mdi-target"></v-icon>Deliver
+                                                certainty in every shipment.</v-list-item>
+                                        </v-list>
+                                    </v-col>
+                                    <v-col cols="12" sm="6">
+                                        <v-list density="compact">
+                                            <v-list-subheader class="px-0 text-uppercase text-caption">Core
+                                                Values</v-list-subheader>
+                                            <v-list-item class="px-0"><v-icon start
+                                                    icon="mdi-shield-check-outline"></v-icon>Integrity</v-list-item>
+                                            <v-list-item class="px-0"><v-icon start
+                                                    icon="mdi-speedometer"></v-icon>Speed</v-list-item>
+                                            <v-list-item class="px-0"><v-icon start
+                                                    icon="mdi-handshake-outline"></v-icon>Partnership</v-list-item>
+                                        </v-list>
+                                    </v-col>
+                                </v-row>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </section>
+
+                <!-- CTA band -->
+                <section class="section brand-gradient">
+                    <v-container>
+                        <v-row align="center" justify="space-between">
+                            <v-col cols="12" md="8">
+                                <div class="text-h5 text-sm-h4 font-weight-bold" style="color:#1f2937;">Let’s Work
+                                    Together</div>
+                                <div class="text-body-1" style="color:#1f2937; opacity:.85;">Tell us your goals—our team
+                                    will craft a tailored, cost‑effective plan.</div>
+                            </v-col>
+                            <v-col cols="12" md="4" class="text-md-right">
+                                <v-btn size="large" color="black" class="text-white" rounded="lg"
+                                    @click="trackAndGo('contact','cta_contact_click')">
+                                    <v-icon start icon="mdi-email-send-outline"></v-icon> Contact Us
+                                </v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </section>
+
+                <!-- Contact -->
+                <section id="contact" class="section">
+                    <v-container>
+                        <v-row class="mb-6">
+                            <v-col cols="12" class="text-center">
+                                <div class="text-h4 font-weight-bold mb-2" style="color: var(--ink);">Contact Us</div>
+                                <div class="text-subtitle-1" style="color: var(--ink-2);">We’ll respond within one
+                                    business day.</div>
+                            </v-col>
+                        </v-row>
+
+                        <v-row>
+                            <v-col cols="12" md="7">
+                                <v-form v-model="valid" @submit.prevent="handleSubmit">
+                                    <v-text-field v-model="form.name" label="Name" :rules="[rules.required]"
+                                        prepend-inner-icon="mdi-account" variant="outlined" rounded="lg"
+                                        density="comfortable" required></v-text-field>
+                                    <v-text-field v-model="form.email" label="Email"
+                                        :rules="[rules.required, rules.email]" prepend-inner-icon="mdi-email"
+                                        variant="outlined" rounded="lg" density="comfortable" required></v-text-field>
+                                    <v-textarea v-model="form.message" label="Message" :rules="[rules.required]"
+                                        prepend-inner-icon="mdi-message-text-outline" variant="outlined" rounded="lg"
+                                        rows="5" auto-grow required></v-textarea>
+
+                                    <div class="d-flex align-center" style="gap: 12px;">
+                                        <v-text-field v-model="form.phone" label="Phone (optional)"
+                                            prepend-inner-icon="mdi-phone" variant="outlined" rounded="lg"
+                                            density="comfortable"></v-text-field>
+                                        <v-text-field v-model="form.altEmail" label="Alt. Email (optional)"
+                                            prepend-inner-icon="mdi-at" variant="outlined" rounded="lg"
+                                            density="comfortable"></v-text-field>
+                                    </div>
+
+                                    <div class="d-flex flex-wrap" style="gap: 10px;">
+                                        <v-btn type="submit" color="amber-darken-1" class="text-black" rounded="lg"
+                                            :disabled="!valid" @click="track('contact_form_submit')">
+                                            <v-icon start icon="mdi-send"></v-icon>
+                                            Send Message
+                                        </v-btn>
+                                        <v-btn variant="text" @click="resetForm">Reset</v-btn>
+                                    </div>
+                                </v-form>
+                            </v-col>
+                            <v-col cols="12" md="5">
+                                <v-card border rounded="xl">
+                                    <v-card-text>
+                                        <div class="text-subtitle-1 font-weight-semibold mb-3">Reach us</div>
+                                        <div class="d-flex align-center mb-2"><v-icon class="mr-2"
+                                                icon="mdi-email-outline"></v-icon><a :href="`mailto:${companyEmail}`">{{
+                                                companyEmail }}</a></div>
+                                        <div class="d-flex align-center mb-2"><v-icon class="mr-2"
+                                                icon="mdi-phone"></v-icon><span>{{ companyPhone }}</span></div>
+                                        <div class="d-flex align-center mb-4"><v-icon class="mr-2"
+                                                icon="mdi-map-marker-outline"></v-icon><span>{{ companyAddress }}</span>
+                                        </div>
+
+                                        <div class="text-subtitle-2 font-weight-medium mb-2">Follow us</div>
+                                        <div class="d-flex" style="gap: 10px;">
+                                            <v-btn :href="social.linkedin" target="_blank" icon variant="tonal"
+                                                aria-label="LinkedIn"><v-icon icon="mdi-linkedin"></v-icon></v-btn>
+                                            <v-btn :href="social.facebook" target="_blank" icon variant="tonal"
+                                                aria-label="Facebook"><v-icon icon="mdi-facebook"></v-icon></v-btn>
+                                            <v-btn :href="social.twitter" target="_blank" icon variant="tonal"
+                                                aria-label="Twitter"><v-icon icon="mdi-twitter"></v-icon></v-btn>
+                                            <v-btn :href="social.instagram" target="_blank" icon variant="tonal"
+                                                aria-label="Instagram"><v-icon icon="mdi-instagram"></v-icon></v-btn>
+                                        </div>
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </section>
+            </v-main>
+
+            <!-- Footer -->
+            <v-footer class="py-6" border>
+                <v-container>
+                    <v-row>
+                        <v-col cols="12" md="6">
+                            <div class="text-subtitle-1 font-weight-bold mb-2">Hive Supply Chain Management</div>
+                            <div class="text-body-2" style="color: var(--ink-2);">&copy; <span>{{ year }}</span> Hive
+                                SCM. All rights reserved.</div>
+                        </v-col>
+                        <v-col cols="12" md="6" class="text-md-right">
+                            <div class="d-flex justify-end align-center flex-wrap" style="gap: 8px;">
+                                <v-btn icon variant="text" :href="social.linkedin" target="_blank"
+                                    aria-label="LinkedIn"><v-icon icon="mdi-linkedin"></v-icon></v-btn>
+                                <v-btn icon variant="text" :href="social.facebook" target="_blank"
+                                    aria-label="Facebook"><v-icon icon="mdi-facebook"></v-icon></v-btn>
+                                <v-btn icon variant="text" :href="social.twitter" target="_blank"
+                                    aria-label="Twitter"><v-icon icon="mdi-twitter"></v-icon></v-btn>
+                                <v-btn icon variant="text" :href="social.instagram" target="_blank"
+                                    aria-label="Instagram"><v-icon icon="mdi-instagram"></v-icon></v-btn>
+                            </div>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-footer>
+
+            <!-- Floating: Go To Top + WhatsApp -->
+            <div class="go-top-btn" v-show="showTop">
+                <v-btn icon size="large" color="amber-darken-1" @click="go('home')" aria-label="Go to top">
+                    <v-icon icon="mdi-arrow-up"></v-icon>
+                </v-btn>
+            </div>
+            <div class="whatsapp-fab">
+                <v-btn :href="`https://wa.me/${whatsAppNumber}?text=Hi%20Hive%20SCM,%20I%27d%20like%20a%20quote.`"
+                    target="_blank" size="large" color="green-accent-4" icon aria-label="WhatsApp chat">
+                    <v-icon icon="mdi-whatsapp"></v-icon>
+                </v-btn>
+            </div>
+
+            <!-- Snackbar -->
+            <v-snackbar v-model="snackbar" timeout="3000" color="success">Message draft opened in your email
+                client.</v-snackbar>
+        </v-app>
+    </div>
+
+    <script>
+        const { createApp, ref, onMounted } = Vue;
+        const { createVuetify } = Vuetify;
+
+        const vuetify = createVuetify({
+            theme: {
+                defaultTheme: 'light',
+                themes: { light: { dark: false, colors: { primary: '#ffb300', secondary: '#1f2937' } } },
+            },
+        });
+
+        createApp({
+            setup() {
+                const drawer = ref(false);
+                const snackbar = ref(false);
+                const valid = ref(false);
+                const active = ref('home');
+                const showTop = ref(false);
+
+                // Replace with real company details
+                const companyEmail = 'sales@hivescm.com';
+                const companyPhone = '+1 (555) 123‑4567';
+                const companyAddress = 'Global HQ, 100 Logistics Way';
+                const whatsAppNumber = '15551234567'; // Include country code
+
+                const year = new Date().getFullYear();
+
+                const services = ref([
+                    { icon: 'mdi-ferry', title: 'Ocean Freight', desc: 'FCL/LCL across major trade lanes with reliable schedules.' },
+                    { icon: 'mdi-airplane-takeoff', title: 'Air Freight', desc: 'Time‑critical cargo with global carrier network.' },
+                    { icon: 'mdi-truck-fast', title: 'Road Transport', desc: 'FTL/LTL trucking with live tracking and POD.' },
+                    { icon: 'mdi-warehouse', title: 'Warehousing', desc: 'Secure storage, pick‑pack, inventory management.' },
+                    { icon: 'mdi-file-document-check-outline', title: 'Customs Clearance', desc: 'Brokerage, documentation, and trade compliance.' },
+                    { icon: 'mdi-package-variant-closed', title: 'Last‑Mile Delivery', desc: 'From hub to doorstep with SLA guarantees.' },
+                    { icon: 'mdi-chart-line', title: 'Supply Chain Analytics', desc: 'Forecasting, cost optimization, and visibility.' },
+                    { icon: 'mdi-shield-lock-outline', title: 'Insurance & Risk', desc: 'Cargo insurance and risk management services.' },
+                ]);
+
+                const form = ref({ name: '', email: '', message: '', phone: '', altEmail: '' });
+                const rules = { required: v => !!v || 'Required', email: v => /.+@.+\..+/.test(v) || 'Invalid email' };
+
+                function mailtoEncode(str) { return encodeURIComponent(str).replace(/%20/g, '+'); }
+
+                const handleSubmit = () => {
+                    const subject = `Quote Request from ${form.value.name}`;
+                    const body = `Name: ${form.value.name}\nEmail: ${form.value.email}\nPhone: ${form.value.phone}\nAlt Email: ${form.value.altEmail}\n\nMessage:\n${form.value.message}`;
+                    const href = `mailto:${companyEmail}?subject=${mailtoEncode(subject)}&body=${mailtoEncode(body)}`;
+                    window.location.href = href;
+                    snackbar.value = true;
+                };
+                const resetForm = () => { form.value = { name: '', email: '', message: '', phone: '', altEmail: '' }; };
+
+                const go = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+                const track = (name) => { try { gtag('event', name); } catch (e) { } };
+                const trackAndGo = (id, name) => { track(name); go(id); };
+
+                const navTap = (id) => { drawer.value = false; go(id); };
+
+                // Active menu highlight + show Top button
+                onMounted(() => {
+                    const sections = ['home', 'services', 'about', 'contact'];
+                    const opts = { root: null, rootMargin: '0px 0px -70% 0px', threshold: 0 };
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) { active.value = entry.target.id; }
+                        });
+                    }, opts);
+                    sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+
+                    window.addEventListener('scroll', () => { showTop.value = window.scrollY > 200; }, { passive: true });
+                });
+
+                return {
+                    drawer, snackbar, valid, active, showTop, services, form, rules, handleSubmit, resetForm, go, navTap, track, trackAndGo,
+                    year, companyEmail, companyPhone, companyAddress, whatsAppNumber,
+                    social: { linkedin: 'https://www.linkedin.com/', facebook: 'https://www.facebook.com/', twitter: 'https://twitter.com/', instagram: 'https://www.instagram.com/' }
+                };
+            },
+        }).use(vuetify).mount('#app');
+    </script>
+</body>
+
+</html>
