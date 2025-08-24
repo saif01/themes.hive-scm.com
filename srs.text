@@ -1,0 +1,52 @@
+
+Prompts: 
+
+Design a responsive, single-page website for Hive Supply Chain Management using Vue 3 and Vuetify 3, using by HTML file. The site should feature a header with logo, navigation menu (Home, Services, About Us, Contact Us) Active header menu indication, and a 'Get a Quote' button; a hero section with a full-width logistics background image, overlay text, and a CTA button; a services section showcasing 8 core services with icons and brief descriptions; an About Us section detailing mission, values, and experience; a prominent 'Let’s Work Together' CTA with a Contact Us form (name, email, message, optional phone or email), including social media links; a footer with company info, social icons, and copyright. Incorporate a 'Go to the Top' button, a persistent WhatsApp quick-contact icon, and smooth scrolling navigation. Use gradient backgrounds with animations for sections, ensure mobile responsiveness with clean, whitespace-friendly, modern design, optimized performance with compressed assets, and full SEO setup with meta tags. Integrate Google Analytics for tracking user interactions.
+
+
+
+Dark gray/black: A linear gradient starting from a dark gray or black color. A common code for a similar color is #292929 or a very dark gray close to black.
+
+Yellow/Orange: A linear gradient starting from a bright yellow and fading to an orange or amber color. A common code for a similar yellow is #FFC107 and for the orange/amber is #FFA000. The specific shades may vary.
+
+The most prominent colors in the icon are as follows:
+
+White (RGB: 255, 255, 255) – Predominant color.
+
+Very Light Yellow (RGB: 254, 255, 255) – A light shade of yellow.
+
+Golden Yellow (RGB: 248, 224, 40) – A bold yellow.
+
+Off-White (RGB: 255, 255, 254) – A subtle off-white.
+
+Orange (RGB: 247, 185, 33) – A strong orange.
+
+Details:
+
+Software Requirement Specification (SRS)  
+Hive Supply Chain Management – Website Design
+1. Objective
+•	Develop a clean, responsive, one-page VUE 3, VUETIFY 3, HTML website for Hive Supply Chain Management.
+•	The website should introduce the company, highlight services, and facilitate client inquiries.
+•	It must be user-friendly, mobile-responsive, SEO-optimized, and support analytics tracking.
+2. Website Layout
+•	Header: Logo (top-left), navigation menu (Home, Services, About Us, Contact Us), with active menu and a 'Get a Quote' button.
+•	Hero Section: Full-width logistics image with overlay text, headline, sub-headline, and 'Explore Our Services' CTA.
+•	Services Section: Showcase 8 core services with icons and short descriptions.
+•	About Us: Mission, core values, and company experience.
+•	CTA Section: 'Let’s Work Together' message with a 'Contact Us' button.
+•	Contact Us: Form (Name, Email, Message), optional phone/email, and social media links.
+•	Footer: Company info, social media icons, copyright.
+•	Go to the Top button 
+3. Design & Functional Specifications
+•	All section gradient color codes are use with cool animations
+•	Responsive Design: Adapt layout for desktop, tablet, and mobile.
+•	Visuals: Use high-quality logistics/business images and consistent branding.
+•	Layout: Simple, clean, whitespace-friendly, modern look.
+•	Performance: Optimize assets for speed (compressed images, scripts).
+•	Navigation: Smooth scrolling across all sections.
+•	CTAs: Present in all key sections (Get a Quote, Explore, Contact Us).
+•	Contact Form Integration: Linked to email system for capturing inquiries.
+•	WhatsApp Button: Persistent quick-contact option on the right side, middle floating icon.
+•	SEO: Include meta titles, descriptions, and keywords.
+•	Analytics: Integrate Google Analytics for user tracking and insights.
