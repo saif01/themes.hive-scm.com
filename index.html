@@ -367,8 +367,6 @@
                                                 aria-label="LinkedIn"><v-icon icon="mdi-linkedin"></v-icon></v-btn>
                                             <v-btn :href="social.facebook" target="_blank" icon variant="tonal"
                                                 aria-label="Facebook"><v-icon icon="mdi-facebook"></v-icon></v-btn>
-                                            <v-btn :href="social.twitter" target="_blank" icon variant="tonal"
-                                                aria-label="Twitter"><v-icon icon="mdi-twitter"></v-icon></v-btn>
                                             <v-btn :href="social.instagram" target="_blank" icon variant="tonal"
                                                 aria-label="Instagram"><v-icon icon="mdi-instagram"></v-icon></v-btn>
                                         </div>
@@ -395,8 +393,6 @@
                                     aria-label="LinkedIn"><v-icon icon="mdi-linkedin"></v-icon></v-btn>
                                 <v-btn icon variant="text" :href="social.facebook" target="_blank"
                                     aria-label="Facebook"><v-icon icon="mdi-facebook"></v-icon></v-btn>
-                                <v-btn icon variant="text" :href="social.twitter" target="_blank"
-                                    aria-label="Twitter"><v-icon icon="mdi-twitter"></v-icon></v-btn>
                                 <v-btn icon variant="text" :href="social.instagram" target="_blank"
                                     aria-label="Instagram"><v-icon icon="mdi-instagram"></v-icon></v-btn>
                             </div>
@@ -444,10 +440,10 @@
                 const showTop = ref(false);
 
                 // Replace with real company details
-                const companyEmail = 'sales@hivescm.com';
-                const companyPhone = '+1 (555) 123‑4567';
-                const companyAddress = 'Global HQ, 100 Logistics Way';
-                const whatsAppNumber = '15551234567'; // Include country code
+                const companyEmail = 'contact@hive-scm.com';
+                const companyPhone = '+88 01674 085 403';
+                const companyAddress = '2/C, Mirpur Tower, Mirpur-1, Dhaka-1216, Bangladesh';
+                const whatsAppNumber = '+8801674085403'; // Include country code
 
                 const year = new Date().getFullYear();
 
@@ -499,7 +495,7 @@
                 return {
                     drawer, snackbar, valid, active, showTop, services, form, rules, handleSubmit, resetForm, go, navTap, track, trackAndGo,
                     year, companyEmail, companyPhone, companyAddress, whatsAppNumber,
-                    social: { linkedin: 'https://www.linkedin.com/', facebook: 'https://www.facebook.com/', twitter: 'https://twitter.com/', instagram: 'https://www.instagram.com/' }
+                    social: { linkedin: 'https://www.linkedin.com/company/HiveSCM', facebook: 'https://www.facebook.com/HiveSCM', instagram: 'https://www.instagram.com/HiveCM' }
                 };
             },
         }).use(vuetify).mount('#app');
