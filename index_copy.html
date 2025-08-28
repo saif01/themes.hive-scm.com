@@ -28,9 +28,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@3.4.38/dist/vue.global.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@3.6.15/dist/vuetify.min.js"></script>
 
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
     <style>
         :root {
             --brand: #ffb300;
@@ -114,10 +111,6 @@
 
         .v-application {
             background: #fff;
-        }
-
-        .v-field__input {
-            color: var(--ink) !important;
         }
     </style>
 
@@ -325,28 +318,29 @@
 
                         <v-row>
                             <v-col cols="12" md="7">
-                                <v-form v-model="valid" @submit.prevent="handleSubmit" ref="form">
+                                <v-form v-model="valid" @submit.prevent="handleSubmit">
                                     <v-text-field v-model="form.name" label="Name" :rules="[rules.required]"
                                         prepend-inner-icon="mdi-account" variant="outlined" rounded="lg"
                                         density="comfortable" required></v-text-field>
                                     <v-text-field v-model="form.email" label="Email"
                                         :rules="[rules.required, rules.email]" prepend-inner-icon="mdi-email"
                                         variant="outlined" rounded="lg" density="comfortable" required></v-text-field>
-                                    <v-text-field v-model="form.phone" label="Phone (optional)"
-                                        prepend-inner-icon="mdi-phone" variant="outlined" rounded="lg"
-                                        density="comfortable"></v-text-field>
-
-
                                     <v-textarea v-model="form.message" label="Message" :rules="[rules.required]"
                                         prepend-inner-icon="mdi-message-text-outline" variant="outlined" rounded="lg"
                                         rows="5" auto-grow required></v-textarea>
 
-
+                                    <div class="d-flex align-center" style="gap: 12px;">
+                                        <v-text-field v-model="form.phone" label="Phone (optional)"
+                                            prepend-inner-icon="mdi-phone" variant="outlined" rounded="lg"
+                                            density="comfortable"></v-text-field>
+                                        <v-text-field v-model="form.altEmail" label="Alt. Email (optional)"
+                                            prepend-inner-icon="mdi-at" variant="outlined" rounded="lg"
+                                            density="comfortable"></v-text-field>
+                                    </div>
 
                                     <div class="d-flex flex-wrap" style="gap: 10px;">
                                         <v-btn type="submit" color="amber-darken-1" class="text-black" rounded="lg"
-                                            :disabled="!valid || loading" :loading="loading"
-                                            @click="track('contact_form_submit')">
+                                            :disabled="!valid" @click="track('contact_form_submit')">
                                             <v-icon start icon="mdi-send"></v-icon>
                                             Send Message
                                         </v-btn>
@@ -373,6 +367,8 @@
                                                 aria-label="LinkedIn"><v-icon icon="mdi-linkedin"></v-icon></v-btn>
                                             <v-btn :href="social.facebook" target="_blank" icon variant="tonal"
                                                 aria-label="Facebook"><v-icon icon="mdi-facebook"></v-icon></v-btn>
+                                            <v-btn :href="social.twitter" target="_blank" icon variant="tonal"
+                                                aria-label="Twitter"><v-icon icon="mdi-twitter"></v-icon></v-btn>
                                             <v-btn :href="social.instagram" target="_blank" icon variant="tonal"
                                                 aria-label="Instagram"><v-icon icon="mdi-instagram"></v-icon></v-btn>
                                         </div>
@@ -399,6 +395,8 @@
                                     aria-label="LinkedIn"><v-icon icon="mdi-linkedin"></v-icon></v-btn>
                                 <v-btn icon variant="text" :href="social.facebook" target="_blank"
                                     aria-label="Facebook"><v-icon icon="mdi-facebook"></v-icon></v-btn>
+                                <v-btn icon variant="text" :href="social.twitter" target="_blank"
+                                    aria-label="Twitter"><v-icon icon="mdi-twitter"></v-icon></v-btn>
                                 <v-btn icon variant="text" :href="social.instagram" target="_blank"
                                     aria-label="Instagram"><v-icon icon="mdi-instagram"></v-icon></v-btn>
                             </div>
@@ -421,7 +419,8 @@
             </div>
 
             <!-- Snackbar -->
-            <v-snackbar v-model="snackbar" :timeout="3000" :color="snackbarColor">{{ snackbarMessage }}</v-snackbar>
+            <v-snackbar v-model="snackbar" timeout="3000" color="success">Message draft opened in your email
+                client.</v-snackbar>
         </v-app>
     </div>
 
@@ -440,25 +439,15 @@
             setup() {
                 const drawer = ref(false);
                 const snackbar = ref(false);
-                const snackbarMessage = ref('');
-                const snackbarColor = ref('success');
                 const valid = ref(false);
                 const active = ref('home');
                 const showTop = ref(false);
-                const loading = ref(false);
-                const form = ref(null);
 
                 // Replace with real company details
-                // const companyEmail = 'iftekharh40@gmail.com'; // Changed to the requested email 
-                const companyEmail = 'syful.cse.bd@gmail.com'; // Changed to the requested email
-                const companyPhone = '+88 01674 085 403';
-                const companyAddress = '2/C, Mirpur Tower, Mirpur-1, Dhaka-1216, Bangladesh';
-                const whatsAppNumber = '+8801674085403'; // Include country code
-
-                // EmailJS configuration - Using a working test configuration
-                const emailjsServiceId = 'service_wvx3ppk'; // Example service ID (replace with your actual)
-                const emailjsTemplateId = 'template_gj6eqnj'; // Example template ID (replace with your actual)
-                const emailjsPublicKey = 'ORGml5BULz4VHbNvK'; // Example public key (replace with your actual)
+                const companyEmail = 'sales@hivescm.com';
+                const companyPhone = '+1 (555) 123‑4567';
+                const companyAddress = 'Global HQ, 100 Logistics Way';
+                const whatsAppNumber = '15551234567'; // Include country code
 
                 const year = new Date().getFullYear();
 
@@ -473,58 +462,19 @@
                     { icon: 'mdi-shield-lock-outline', title: 'Insurance & Risk', desc: 'Cargo insurance and risk management services.' },
                 ]);
 
-                const formData = ref({ name: '', email: '', message: '', phone: '', altEmail: '' });
+                const form = ref({ name: '', email: '', message: '', phone: '', altEmail: '' });
                 const rules = { required: v => !!v || 'Required', email: v => /.+@.+\..+/.test(v) || 'Invalid email' };
 
-                // Initialize EmailJS
-                emailjs.init(emailjsPublicKey);
+                function mailtoEncode(str) { return encodeURIComponent(str).replace(/%20/g, '+'); }
 
-                const handleSubmit = async () => {
-                    if (!valid.value) return;
-
-                    loading.value = true;
-
-                    try {
-                        // Prepare template parameters
-                        const templateParams = {
-                            name: formData.value.name,
-                            email: formData.value.email,
-                            phone: formData.value.phone,
-                            altEmail: formData.value.altEmail || 'Not provided',
-                            message: formData.value.message,
-                        };
-
-                        // Send email using EmailJS
-                        const response = await emailjs.send(
-                            emailjsServiceId,
-                            emailjsTemplateId,
-                            templateParams
-                        );
-
-                        // Show success message
-                        snackbarMessage.value = 'Message sent successfully! We will get back to you soon.';
-                        snackbarColor.value = 'success';
-                        snackbar.value = true;
-
-                        // Reset form
-                        resetForm();
-
-                    } catch (error) {
-                        console.error('Failed to send email:', error);
-                        snackbarMessage.value = 'Failed to send message. Please try again or contact us directly.';
-                        snackbarColor.value = 'error';
-                        snackbar.value = true;
-                    } finally {
-                        loading.value = false;
-                    }
+                const handleSubmit = () => {
+                    const subject = `Quote Request from ${form.value.name}`;
+                    const body = `Name: ${form.value.name}\nEmail: ${form.value.email}\nPhone: ${form.value.phone}\nAlt Email: ${form.value.altEmail}\n\nMessage:\n${form.value.message}`;
+                    const href = `mailto:${companyEmail}?subject=${mailtoEncode(subject)}&body=${mailtoEncode(body)}`;
+                    window.location.href = href;
+                    snackbar.value = true;
                 };
-
-                const resetForm = () => {
-                    formData.value = { name: '', email: '', message: '', phone: '', altEmail: '' };
-                    if (form.value) {
-                        form.value.reset();
-                    }
-                };
+                const resetForm = () => { form.value = { name: '', email: '', message: '', phone: '', altEmail: '' }; };
 
                 const go = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
                 const track = (name) => { try { gtag('event', name); } catch (e) { } };
@@ -547,29 +497,9 @@
                 });
 
                 return {
-                    drawer,
-                    snackbar,
-                    snackbarMessage,
-                    snackbarColor,
-                    valid,
-                    active,
-                    showTop,
-                    services,
-                    form: formData,
-                    rules,
-                    handleSubmit,
-                    resetForm,
-                    go,
-                    navTap,
-                    track,
-                    trackAndGo,
-                    loading,
-                    year,
-                    companyEmail,
-                    companyPhone,
-                    companyAddress,
-                    whatsAppNumber,
-                    social: { linkedin: 'https://www.linkedin.com/company/HiveSCM', facebook: 'https://www.facebook.com/HiveSCM', instagram: 'https://www.instagram.com/HiveCM' }
+                    drawer, snackbar, valid, active, showTop, services, form, rules, handleSubmit, resetForm, go, navTap, track, trackAndGo,
+                    year, companyEmail, companyPhone, companyAddress, whatsAppNumber,
+                    social: { linkedin: 'https://www.linkedin.com/', facebook: 'https://www.facebook.com/', twitter: 'https://twitter.com/', instagram: 'https://www.instagram.com/' }
                 };
             },
         }).use(vuetify).mount('#app');
